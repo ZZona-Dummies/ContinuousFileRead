@@ -14,8 +14,23 @@ namespace ContinousFileRead
 
         private static void Main(string[] args)
         {
-            FileSystemWatcherUtil.Create(ConnectionLog, LastLines_Callback);
+            //FileSystemWatcherUtil.Create(ConnectionLog, LastLines_Callback);
+
+            Tail tail = new Tail(ConnectionLog);
+            //{
+            //    LevelRegex = prms.LevelRegex,
+            //    LineFilter = prms.Filter
+            //};
+
+            tail.Changed += tail_Changed;
+            tail.Run();
+
             Console.ReadKey();
+        }
+
+        private static void tail_Changed(object sender, Tail.TailEventArgs e)
+        {
+            Console.WriteLine(e.Line);
         }
 
         private static void LastLines_Callback(string[] obj)
