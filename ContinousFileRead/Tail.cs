@@ -212,7 +212,7 @@ namespace ContinousFileRead
 
             if (null == levelRegex)
             {
-                Changed(this, new TailEventArgs() { Line = l, Level = currentLevel });
+                Changed(this, new TailEventArgs { Line = l, Level = currentLevel });
                 return;
             }
 
@@ -220,13 +220,13 @@ namespace ContinousFileRead
 
             if (null == match || !match.Success)
             {
-                Changed(this, new TailEventArgs() { Line = l, Level = currentLevel });
+                Changed(this, new TailEventArgs { Line = l, Level = currentLevel });
                 return;
             }
 
             currentLevel = match.Groups["level"].Value;
 
-            Changed(this, new TailEventArgs() { Line = l, Level = currentLevel });
+            Changed(this, new TailEventArgs { Line = l, Level = currentLevel });
         }
     }
 }
